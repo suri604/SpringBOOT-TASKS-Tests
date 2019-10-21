@@ -16,50 +16,50 @@ import java.util.List;
 @DataMongoTest
 public class TrackRepositoryTest {
     @Autowired
-    private TrackRepository muzixRepository;
-    private Track muzix;
+    private TrackRepository trackRepository;
+    private Track track;
 
     @Before
     public void setUp()
     {
-        muzix=new Track();
-        muzix.setTrackName("John");
-        muzix.setTrackId(101);
-        muzix.setTrackComments("Jenny");
+        track=new Track();
+        track.setTrackName("John");
+        track.setTrackId(101);
+        track.setTrackComments("Jenny");
 
     }
 
     @After
     public void tearDown(){
 
-        muzixRepository.deleteAll();
+        trackRepository.deleteAll();
     }
 
 
     @Test
     public void testSaveUser(){
-        muzixRepository.save(muzix);
-        Track fetchTrack = muzixRepository.findById(muzix.getTrackId()).get();
-        Assert.assertEquals(fetchTrack,muzix);
+        trackRepository.save(track);
+        Track fetchTrack = trackRepository.findById(track.getTrackId()).get();
+        Assert.assertEquals(fetchTrack,track);
 
     }
 
     @Test
     public void testSaveUserFailure(){
         Track testMuzix = new Track(34,"Harry123","jnfkdkkd");
-        muzixRepository.save(muzix);
-        Track fetchMuzix = muzixRepository.findById(muzix.getTrackId()).get();
-        Assert.assertNotSame(testMuzix,muzix);
+        trackRepository.save(track);
+        Track fetchMuzix = trackRepository.findById(track.getTrackId()).get();
+        Assert.assertNotSame(testMuzix,track);
     }
     //
     @Test
     public void testGetAllUser(){
         Track u = new Track(10,"Johny12","jdjsa");
         Track u1 = new Track(11,"Harry12","jwdnkjdk");
-        muzixRepository.save(u);
-        muzixRepository.save(u1);
+        trackRepository.save(u);
+        trackRepository.save(u1);
 
-        List<Track> list = muzixRepository.findAll();
+        List<Track> list = trackRepository.findAll();
         Assert.assertEquals("Johny12",list.get(0).getTrackName());
 
 
